@@ -2,36 +2,106 @@
 <html>
 <head>
 <style>
-#div1 {
-    width: 350px;
-    height: 70px;
-    padding: 10px;
-    border: 1px solid #aaaaaa;
+#outer-dropzone {
+  height: 140px;
+}
+
+#inner-dropzone {
+  height: 80px;
+}
+
+.dropzone {
+  background-color: #ccc;
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  margin: 10px auto 30px;
+  padding: 10px;
+  width: 80%;
+  transition: background-color 0.3s;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #29e;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: #4e4;
 }
 </style>
-<script>
-function allowDrop(ev) {
-    ev.preventDefault();
-}
+<script type = "text/interact.js" src="file:///C:/Users/Jeremy%20Woods/Documents/GitHub/CSS566Kanban/interact.js"></script>
+<script "file:///C:/Users/Jeremy%20Woods/Documents/GitHub/CSS566Kanban/interact.js">
+/* The dragging code for '.draggable' from the demo above
+ * applies to this demo as well so it doesn't have to be repeated. */
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
+// enable draggables to be dropped into this
+interact('.dropzone').dropzone({
+  // only accept elements matching this CSS selector
+  accept: '#yes-drop',
+  // Require a 75% element overlap for a drop to be possible
+  overlap: 0.75,
 
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-}
+  // listen for drop related events:
+
+  ondropactivate: function (event) {
+    // add active dropzone feedback
+    event.target.classList.add('drop-active');
+  },
+  ondragenter: function (event) {
+    var draggableElement = event.relatedTarget,
+        dropzoneElement = event.target;
+
+    // feedback the possibility of a drop
+    dropzoneElement.classList.add('drop-target');
+    draggableElement.classList.add('can-drop');
+    draggableElement.textContent = 'Dragged in';
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.classList.remove('drop-target');
+    event.relatedTarget.classList.remove('can-drop');
+    event.relatedTarget.textContent = 'Dragged out';
+  },
+  ondrop: function (event) {
+    event.relatedTarget.textContent = 'Dropped';
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.classList.remove('drop-active');
+    event.target.classList.remove('drop-target');
+  }
+});
 </script>
 </head>
 <body>
+  <div id="no-drop" class="draggable drag-drop"> #no-drop </div>
 
-<p>Drag the W3Schools image into the rectangle:</p>
+  <div id="yes-drop" class="draggable drag-drop"> #yes-drop </div>
 
-<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-<br>
-<img id="drag1" src="http://52.201.237.29/wp-content/uploads/2017/05/img_logo-300x62.gif" draggable="true" ondragstart="drag(event)" width="336" height="69">
-
+  <div id="outer-dropzone" class="dropzone">
+    #outer-dropzone
+    <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
+   </div>
 </body>
 </html>
