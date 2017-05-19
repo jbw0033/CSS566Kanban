@@ -12,7 +12,7 @@
 }
 
 #middle-dropzone {
-  /*position: absolute;*/
+  position: absolute;
   z-index: -1;
   top: 150px;
   right: 343px;
@@ -183,11 +183,17 @@ interact('.dropzone').dropzone({
 <body>
 
 <div id="outer-dropzone" class="dropzone"></div>
-<div id="middle-dropzone" class="dropzone"></div>
-<div id="inner-dropzone" class="dropzone"></div>
+<div id="middle-dropzone" class="dropzone">
+  <div id="yes-drop" class="draggable drag-drop">Choose Host</div>
+  <div id="yes-drop" class="draggable drag-drop">Choose Website</div>
+</div>
+<div id="inner-dropzone" class="dropzone">
 
-<div id="yes-drop" class="draggable drag-drop">Find Platform</div>
-<div id="yes-drop" class="draggable drag-drop">Choose Theme</div>
+  <div id="yes-drop" class="draggable drag-drop">Choose Repository</div>
+  <div id="yes-drop" class="draggable drag-drop">Choose Color</div>
+  <div id="yes-drop" class="draggable drag-drop">Choose Font</div>
+</div>
+
 <div id="yes-drop" class="draggable drag-drop">Organize Pet by Category</div>
 <div id="yes-drop" class="draggable drag-drop">Create Best Picture Section</div>
 <div id="yes-drop" class="draggable drag-drop">Create Filter for Pets</div>
