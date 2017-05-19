@@ -33,9 +33,9 @@
 {
     white-space: nowrap; /*Prevents Wrapping*/
 
-    width: 300px;
-    height: 120px;
-    overflow-x: scroll;
+    width: inherit;
+    height: 700px;
+    overflow-x: hidden;
     overflow-y: hidden;
 }
 .slide
@@ -181,7 +181,7 @@ interact('.dropzone').dropzone({
 </script>
 </head>
 <body>
-
+<div id="container" class="container">
 <div id="outer-dropzone" class="dropzone">
   <div id="yes-drop" class="draggable drag-drop">Choose Host</div>
   <div id="yes-drop" class="draggable drag-drop">Choose Website</div>
@@ -201,5 +201,6 @@ interact('.dropzone').dropzone({
 <div id="yes-drop" class="draggable drag-drop">Link to Social Media</div>
 
 <img id="kanban-board" src="Kanban Board.jpg" style="position:absolute; right:0px; z-index:-2;"></img>
+</div>
 </body>
 </html>
