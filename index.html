@@ -2,42 +2,27 @@
 <html>
 <head>
 <style>
-#outer-dropzone {
-  position: absolute;
-  z-index: -1;
-  top: 150px;
-  right: 0px;
-  width: 285px;
-  height: 345px;
-}
-
-#middle-dropzone {
-  position: absolute;
-  z-index: -1;
-  top: 150px;
-  right: 343px;
-  width: 235px;
-  height: 345px;
-}
-
-#inner-dropzone {
-  position: absolute;
-  z-index: -1;
-  top: 150px;
-  right: 640px;
-  width: 250px;
-  height: 345px;
-}
-
 .container
 {
     white-space: nowrap; /*Prevents Wrapping*/
-
-    width: inherit;
+    width: 100%;
     height: 700px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
+
+.leftPanel {
+  width: 30%;
+  display: inline-block;
+  height: 700px;
+}
+
+.rightPanel {
+  width: 70%;
+  display: inline-block;
+  height: 700px;
+}
+
 .slide
 {
     display: inline-block; /*Display inline and maintain block characteristics.*/
@@ -57,7 +42,9 @@
   margin: 20px auto 30px;
   padding: 20px;
   transition: background-color 0.3s;
-  z-index: -1;
+  width: 200px;
+  height: 100%;
+  min-height: 300px;
 }
 
 .drop-active {
@@ -68,6 +55,10 @@
   background-color: #29e;
   border-color: #fff;
   border-style: solid;
+}
+
+.leftPanel .drag-drop {
+  float: left;
 }
 
 .drag-drop {
@@ -90,8 +81,12 @@
   background-color: #4e4;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://code.interactjs.io/v1.2.6/interact.js"></script>
 <script>
+
+var _draggablesParent;
+
 // target elements with the "draggable" class
 interact('.draggable')
   .draggable({
@@ -116,6 +111,19 @@ interact('.draggable')
         'moved a distance of '
         + (Math.sqrt(event.dx * event.dx +
                      event.dy * event.dy)|0) + 'px');
+
+      var me = $(event.target);
+      if(!me.parent().hasClass("dropzone")) {
+        _draggablesParent.append(me);
+      }
+    },
+
+    onstart: function(event) {
+      var me = $(event.target);
+      _draggablesParent = me.parent();
+      me.css("position", "absolute");
+      $("body").append(me.detach());
+      
     }
   });
 
@@ -144,7 +152,7 @@ interact('.draggable')
 // enable draggables to be dropped into this
 interact('.dropzone').dropzone({
   // only accept elements matching this CSS selector
-  accept: '#yes-drop',
+  accept: 'div.yes-drop',
   // Require a 75% element overlap for a drop to be possible
   overlap: 0.75,
 
@@ -170,7 +178,10 @@ interact('.dropzone').dropzone({
     // event.relatedTarget.textContent = 'Dragged out';
   },
   ondrop: function (event) {
-  //  event.relatedTarget.textContent = 'Dropped';
+    var into = $(event.target);
+    var me = $(event.relatedTarget).detach();
+    into.append(me);
+    //  event.relatedTarget.textContent = 'Dropped';
   },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
@@ -181,19 +192,16 @@ interact('.dropzone').dropzone({
 </script>
 </head>
 <body>
-<div id="container" class="container">
-<div id="outer-dropzone" class="dropzone"></div>
-<div id="middle-dropzone" class="dropzone"></div>
-<div id="inner-dropzone" class="dropzone"></div>
 
-<div id="yes-drop" class="draggable drag-drop">Find Platform</div>
-<div id="yes-drop" class="draggable drag-drop">Choose Theme</div>
-<div id="yes-drop" class="draggable drag-drop">Organize Pet by Category</div>
-<div id="yes-drop" class="draggable drag-drop">Create Best Picture Section</div>
-<div id="yes-drop" class="draggable drag-drop">Create Filter for Pets</div>
-<div id="yes-drop" class="draggable drag-drop">Link to Social Media</div>
+      <div class="yes-drop draggable drag-drop">Find Platform</div>
+      <div class="yes-drop draggable drag-drop">Choose Theme</div>
+      <div class="yes-drop draggable drag-drop">Organize Pet by Category</div>
+      <div class="yes-drop draggable drag-drop">Create Best Picture Section</div>
+      <div class="yes-drop draggable drag-drop">Create Filter for Pets</div>
+      <div class="yes-drop draggable drag-drop">Link to Social Media</div>
 
-<img id="kanban-board" src="Kanban Board.jpg" style="position:absolute; right:0px; z-index:-2;"></img>
-</div>
+      <div id="outer-dropzone" class="dropzone"></div>
+      <div id="middle-dropzone" class="dropzone"></div>
+      <div id="inner-dropzone" class="dropzone"></div>
 </body>
 </html>

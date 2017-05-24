@@ -2,41 +2,78 @@
 <html>
 <head>
 <style>
-#outer-dropzone {
-  position: absolute;
-  z-index: -1;
-  top: 150px;
-  right: 0px;
-  width: 285px;
+#breakdown-doing {
+  margin: 2px;
+  margin-top: 165px;
+  width: 113px;
   height: 345px;
+  float: right
 }
 
-#middle-dropzone {
-  position: absolute;
-  z-index: -1;
-  top: 150px;
-  right: 343px;
-  width: 235px;
+#breakdown-done {
+  margin: 2px;
+  margin-top: 165px;
+  width: 113px;
   height: 345px;
+  float: right
 }
 
-#inner-dropzone {
-  position: absolute;
-  z-index: -1;
-  top: 150px;
-  right: 640px;
-  width: 250px;
+#develop-doing {
+  margin: 1px;
+  margin-top: 165px;
+  width: 86px;
   height: 345px;
+  float: right
+}
+
+#develop-done {
+  margin: 2px;
+  margin-top: 165px;
+  width: 107px;
+  height: 345px;
+  float: right
+}
+
+#testing-doing {
+  margin: 1px;
+  margin-top: 165px;
+  width: 79px;
+  height: 345px;
+  float: right
+}
+
+#testing-done {
+  margin: 2px;
+  margin-top: 165px;
+  margin-right: 0;
+  width: 151px;
+  height: 345px;
+  float: right
 }
 
 .container
 {
-    white-space: nowrap; /*Prevents Wrapping*/
-
-    width: inherit;
+    /*white-space: nowrap; /*Prevents Wrapping*/*/
+    width: 100%;
     height: 700px;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+
+.leftPanel
+{
+  width: 20%;
+  display:inline-block;
+  height: 700px;
+  float: left;
+}
+
+.rightPanel
+{
+  width: 80%;
+  display: inline-block;
+  height: 700px;
+  float: right;
 }
 .slide
 {
@@ -57,7 +94,6 @@
   margin: 20px auto 30px;
   padding: 20px;
   transition: background-color 0.3s;
-  z-index: -1;
 }
 
 .drop-active {
@@ -99,7 +135,7 @@ interact('.draggable')
     inertia: true,
     // keep the element within the area of it's parent
     restrict: {
-      restriction: "parent",
+      // restriction: "parent",
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
@@ -124,6 +160,12 @@ interact('.draggable')
         // keep the dragged position in the data-x/data-y attributes
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+  //  var parent = (event.currentTarget).attr('class');
+  //
+  //  if(parent != "container") {
+  //    event.relatedTarget.detach();
+  //  }
 
     // translate the element
     target.style.webkitTransform =
@@ -182,22 +224,26 @@ interact('.dropzone').dropzone({
 </head>
 <body>
 
-<div id="container" class="container">
-<div id="outer-dropzone" class="dropzone"></div>
-<div id="middle-dropzone" class="dropzone"></div>
-<div id="inner-dropzone" class="dropzone">
-  <div id="yes-drop" class="draggable drag-drop">Choose Theme</div>
-  <div id="yes-drop" class="draggable drag-drop">Choose Host</div>
-  <div id="yes-drop" class="draggable drag-drop">Choose Website</div>
-  <div id="yes-drop" class="draggable drag-drop">Choose Repository</div>
-</div>
+<div id="whole-window" class="container">
+  <div id="rightside" class="rightPanel">
+    <div id="testing-done" class="dropzone"></div>
+    <div id="testing-doing" class="dropzone"></div>
+    <div id="develop-done" class="dropzone"></div>
+    <div id="develop-doing" class="dropzone"></div>
+    <div id="breakdown-done" class="dropzone"></div>
+    <div id="breakdown-doing" class="dropzone">
+      <div id="yes-drop" class="draggable drag-drop" style="float:left">Choose Theme</div>
+      <div id="yes-drop" class="draggable drag-drop" style="float:left">Find Platform</div>
+    </div>
+  </div>
 
-<div id="yes-drop" class="draggable drag-drop">Organize Pet by Category</div>
-<div id="yes-drop" class="draggable drag-drop">Create Best Picture Section</div>
-<div id="yes-drop" class="draggable drag-drop">Create Filter for Pets</div>
-<div id="yes-drop" class="draggable drag-drop">Link to Social Media</div>
-
-<img id="kanban-board" src="Kanban Board.jpg" style="position:absolute; right:0px; z-index:-2;"></img>
+  <div id="leftside" class="leftPanel">
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Organize Pet by Category</div>
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Create Best Picture Section</div>
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Create Filter for Pets</div>
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Link to Social Media</div>
+  </div>
+  <img id="kanban-board" class="picture" src="Kanban Board.jpg" style="position:absolute; right:0px; z-index:-2;"></img>
 </div>
 </body>
 </html>
