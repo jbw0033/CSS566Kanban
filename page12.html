@@ -53,11 +53,11 @@
 
 .container
 {
-    /*white-space: nowrap; /*Prevents Wrapping*/*/
+    /*white-space: nowrap;; /*Prevents Wrapping*/*/
     width: 100%;
     height: 700px;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .leftPanel
@@ -77,14 +77,9 @@
 }
 .slide
 {
-    display: inline-block; /*Display inline and maintain block characteristics.*/
-    vertical-align: top; /*Makes sure all the divs are correctly aligned.*/
-    white-space: normal; /*Prevents child elements from inheriting nowrap.*/
-
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    margin: 5px;
+    position: relative;
+    right: 0px;
+    height: auto;
 }
 
 .dropzone {
@@ -256,11 +251,13 @@ interact('.dropzone').dropzone({
     </div>
     <div id="breakdown-doing" class="dropzone">
     </div>
+  <div class="slide">
+    <img id="kanban-board" class="picture" src="Kanban Board.jpg" style="position:absolute; right:0px; z-index:-2;"></img>
+  </div>
   </div>
 
   <div id="leftside" class="leftPanel">
   </div>
-  <img id="kanban-board" class="picture" src="Kanban Board.jpg" style="position:absolute; right:0px; z-index:-2;"></img>
 </div>
 </body>
 </html>
