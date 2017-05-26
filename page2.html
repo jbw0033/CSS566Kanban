@@ -122,8 +122,38 @@
   background-color: #4e4;
 }
 </style>
+</head>
+<body>
+
+<div id="whole-window" class="container">
+  <div id="rightside" class="rightPanel">
+    <div id="testing-done" class="dropzone"></div>
+    <div id="testing-doing" class="dropzone"></div>
+    <div id="develop-done" class="dropzone"></div>
+    <div id="develop-doing" class="dropzone"></div>
+    <div id="breakdown-done" class="dropzone"></div>
+    <div id="breakdown-doing" class="dropzone">
+      <div id="yes-drop" class="draggable drag-drop" style="float:left">Choose<br>Theme</div>
+      <div id="yes-drop" class="draggable drag-drop" style="float:left">Find<br>Platform</div>
+    </div>
+    <div class="slide">
+    <img id="kanban-board" class="picture" src="Kanban Board.jpg" style="position:absolute; z-index:-2;"></img>
+  </div>
+  </div>
+
+  <div id="leftside" class="leftPanel">
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Organize Pet<br>by Category</div>
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Create Best<br>Picture Section</div>
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Create Filter<br>for Pets</div>
+    <div id="yes-drop" class="draggable drag-drop" style="float:left">Link to<br>Social Media</div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  //ME-JEREMY
 <script src="http://code.interactjs.io/v1.2.6/interact.js"></script>
 <script>
+$( document ).ready(function() { //ME-JEREMY
+    var _ActiveZone; //ME-JEREMY
+
 // target elements with the "draggable" class
 interact('.draggable')
   .draggable({
@@ -131,7 +161,7 @@ interact('.draggable')
     inertia: true,
     // keep the element within the area of it's parent
     restrict: {
-      // restriction: "parent",
+      restriction: "parent",
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
@@ -149,6 +179,29 @@ interact('.draggable')
         + (Math.sqrt(event.dx * event.dx +
                      event.dy * event.dy)|0) + 'px');
     }
+  }).on('up', function(event) { //ME-JEREMY
+  		var me = $(event.target);
+		  if(me.hasClass('can-drop')) {
+		  	var zone = $(_ActiveZone);
+		  	if(me.parent()[0] != zone[0]) {
+		  		me.detach();
+		  		zone.append(me);
+
+          var target = event.target,
+              // keep the dragged position in the data-x/data-y attributes
+              x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+              y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+          // translate the element
+          target.style.webkitTransform =
+          target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)';
+
+          // update the posiion attributes
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
+		  	}
+		  }
   });
 
   function dragMoveListener (event) {
@@ -196,6 +249,8 @@ interact('.dropzone').dropzone({
     var draggableElement = event.relatedTarget,
         dropzoneElement = event.target;
 
+        _ActiveZone = event.target; //ME-JEREMY
+
     // feedback the possibility of a drop
     dropzoneElement.classList.add('drop-target');
     draggableElement.classList.add('can-drop');
@@ -216,32 +271,8 @@ interact('.dropzone').dropzone({
     event.target.classList.remove('drop-target');
   }
 });
+
+});
 </script>
-</head>
-<body>
-
-<div id="whole-window" class="container">
-  <div id="rightside" class="rightPanel">
-    <div id="testing-done" class="dropzone"></div>
-    <div id="testing-doing" class="dropzone"></div>
-    <div id="develop-done" class="dropzone"></div>
-    <div id="develop-doing" class="dropzone"></div>
-    <div id="breakdown-done" class="dropzone"></div>
-    <div id="breakdown-doing" class="dropzone">
-      <div id="yes-drop" class="draggable drag-drop" style="float:left">Choose<br>Theme</div>
-      <div id="yes-drop" class="draggable drag-drop" style="float:left">Find<br>Platform</div>
-    </div>
-    <div class="slide">
-    <img id="kanban-board" class="picture" src="Kanban Board.jpg" style="position:absolute; z-index:-2;"></img>
-  </div>
-  </div>
-
-  <div id="leftside" class="leftPanel">
-    <div id="yes-drop" class="draggable drag-drop" style="float:left">Organize Pet<br>by Category</div>
-    <div id="yes-drop" class="draggable drag-drop" style="float:left">Create Best<br>Picture Section</div>
-    <div id="yes-drop" class="draggable drag-drop" style="float:left">Create Filter<br>for Pets</div>
-    <div id="yes-drop" class="draggable drag-drop" style="float:left">Link to<br>Social Media</div>
-  </div>
-</div>
 </body>
 </html>
