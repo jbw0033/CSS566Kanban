@@ -42,7 +42,7 @@
   margin: 20px auto 30px;
   padding: 20px;
   transition: background-color 0.3s;
-  width: 200px;
+  width: 400px;
   height: 100%;
   min-height: 300px;
 }
@@ -59,6 +59,13 @@
 
 .leftPanel .drag-drop {
   float: left;
+}
+
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }
 
 .drag-drop {
@@ -83,15 +90,32 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://code.interactjs.io/v1.2.6/interact.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+      <div class="yes-drop draggable drag-drop">Find Platform</div>
+      <div class="yes-drop draggable drag-drop">Choose Theme</div>
+      <div class="yes-drop draggable drag-drop">Organize Pet by Category</div>
+      <div class="yes-drop draggable drag-drop">Create Best Picture Section</div>
+      <div class="yes-drop draggable drag-drop">Create Filter for Pets</div>
+      <div class="yes-drop draggable drag-drop">Link to Social Media</div>
+
+      <div id="outer-dropzone" class="dropzone"></div>
+      <div id="middle-dropzone" class="dropzone"></div>
+      <div id="inner-dropzone" class="dropzone"></div>
+
 <script>
 
-var _draggablesParent;
+$( document ).ready(function() {
+    var _ActiveZone;
 
 // target elements with the "draggable" class
 interact('.draggable')
   .draggable({
     // enable inertial throwing
-    inertia: true,
+    inertia: false,
     // keep the element within the area of it's parent
     restrict: {
       restriction: "parent",
@@ -105,26 +129,47 @@ interact('.draggable')
     onmove: dragMoveListener,
     // call this function on every dragend event
     onend: function (event) {
+      console.log("onend");
+      /*
       var textEl = event.target.querySelector('p');
 
       textEl && (textEl.textContent =
         'moved a distance of '
         + (Math.sqrt(event.dx * event.dx +
-                     event.dy * event.dy)|0) + 'px');
+                     event.dy * event.dy)|0) + 'px'); */
 
-      var me = $(event.target);
+      /*var me = $(event.target);
       if(!me.parent().hasClass("dropzone")) {
         _draggablesParent.append(me);
-      }
+      }*/
+
+      /*var me = $(event.target);
+      if(me.hasClass('can-drop')) {
+      	var zone = $(_ActiveZone);
+      	if(me.parent()[0] != zone[0]) {
+      		me.detach();
+      		zone.append(me);
+      	}
+      }*/
     },
 
     onstart: function(event) {
-      var me = $(event.target);
-      _draggablesParent = me.parent();
-      me.css("position", "absolute");
-      $("body").append(me.detach());
+      //var me = $(event.target);
+      //_draggablesParent = me.parent();
+      //me.css("position", "absolute");
+      //$("body").append(me);
+      console.log("start");
       
     }
+  }).on('up', function(event) {
+  		var me = $(event.target);
+		  if(me.hasClass('can-drop')) {
+		  	var zone = $(_ActiveZone);
+		  	if(me.parent()[0] != zone[0]) {
+		  		me.detach();
+		  		zone.append(me);
+		  	}
+		  }
   });
 
   function dragMoveListener (event) {
@@ -155,16 +200,20 @@ interact('.dropzone').dropzone({
   accept: 'div.yes-drop',
   // Require a 75% element overlap for a drop to be possible
   overlap: 0.75,
-
   // listen for drop related events:
 
   ondropactivate: function (event) {
     // add active dropzone feedback
     event.target.classList.add('drop-active');
+	console.log("ondropactivate");
   },
   ondragenter: function (event) {
+
+	console.log("ondragenter");
     var draggableElement = event.relatedTarget,
         dropzoneElement = event.target;
+
+    _ActiveZone = event.target;
 
     // feedback the possibility of a drop
     dropzoneElement.classList.add('drop-target');
@@ -172,36 +221,34 @@ interact('.dropzone').dropzone({
   //  draggableElement.textContent = 'Dragged in';
   },
   ondragleave: function (event) {
+	console.log("ondragleave");
     // remove the drop feedback style
     event.target.classList.remove('drop-target');
     event.relatedTarget.classList.remove('can-drop');
     // event.relatedTarget.textContent = 'Dragged out';
   },
   ondrop: function (event) {
-    var into = $(event.target);
+    /*var into = $(event.target);
     var me = $(event.relatedTarget).detach();
-    into.append(me);
+    into.append(me);*/
+    //me.css("float", "left");
     //  event.relatedTarget.textContent = 'Dropped';
+    console.log("ondrop");
   },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
     event.target.classList.remove('drop-active');
     event.target.classList.remove('drop-target');
+	console.log("ondropdeactivate");
   }
 });
+
+	/*$(".yes-drop").off("dragstop").on("dragstop", function() {
+		  
+	});*/
+});
+
+
 </script>
-</head>
-<body>
-
-      <div class="yes-drop draggable drag-drop">Find Platform</div>
-      <div class="yes-drop draggable drag-drop">Choose Theme</div>
-      <div class="yes-drop draggable drag-drop">Organize Pet by Category</div>
-      <div class="yes-drop draggable drag-drop">Create Best Picture Section</div>
-      <div class="yes-drop draggable drag-drop">Create Filter for Pets</div>
-      <div class="yes-drop draggable drag-drop">Link to Social Media</div>
-
-      <div id="outer-dropzone" class="dropzone"></div>
-      <div id="middle-dropzone" class="dropzone"></div>
-      <div id="inner-dropzone" class="dropzone"></div>
 </body>
 </html>
