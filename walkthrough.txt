@@ -1,0 +1,41 @@
+page 3.
+
+Boom! As you can see, 'Find Platform' has been broken down into 'Choose Host', 'Choose Website', and 'Choose Repository'. These are three better defined tasks than the original and should be able to be done in two 8-hour work days (theoretically) so they also meet the 'Definition of Done' for the Breakdown column.
+
+Let's start moving our tasks along through the board. Move all 3 of the items currently in the Breakdown column to the 'Develop-doing' portion of the board. Transfer 'Choose Theme' to the 'Breakdown-Done' portion. We are going to streamline the 'Organize Pet by Category' tasks and move it to 'Breakdown-done' based on the fact that we had an extra spot in the 'Breakdown-Doing' section so we can assume we were able to breakdown two task at a time.
+
+Finally move 'Create Best Picture Section' and 'Create Filter for Pets' to the 'Breakdown-doing' portion and let us proceed with our lessons!
+
+page 4.
+
+'Choose Theme' and 'Organize Pet by Category' have now been broken down. The 'Develop-Doing' tasks were still being worked on and we almost have our entire pipeline filled. Early, on we can see that the 'Breakdown-Done' portion of our board is largely exceeding the capacity of the 'Develop-doing' portion, that might be the sign of the need to change WIP numbers, but this early in the process we can wait to see if this type of thing continues.
+
+Move all of the elements in 'Develop-doing' to 'Develop-done'. Move the top 4 tasks, so all except 'Choose Font' to 'Develop-doing' to reach our WIP limit. 'Create Best Picture Section' has been broken down and needs to be moved to the 'Breakdown-done' portion of the board. Grab 'Link to Social Media' from the backlog to clear it and add it to 'Breakdown-doing' along with 'Create Filter for Pets'. Go to the next lesson.
+
+page 5.
+
+We have reached the WIP limits for both Breakdown and Develop Columns. There is a reasonable amount of tasks on the Kanban board so we can assume our limits are reasonable at the moment. The 'Create Best Picture' tasks has been broken down into 'Ranking System', 'Feedback Method', and 'Award Method'.
+
+Move all of the 'Develop-done' tasks to the 'Testing-doing'. Move all of the tasks in 'Develop-doing' to 'Develop-done'. Move all of the 'Breakdown-done'  to 'Develop-doing'. Move all of the tasks in 'Breakdown-doing' to 'Breakdown-done'. As you can see, our pipeline of tasks is matching up perfectly with our WIP limits and this is what you want in Kanban, not too much work not to less work, just right like Goldilocks. And with that done lets proceed to the next lesson.
+
+page 6.
+
+As you can see, we have now finished our product backlog. Normally when using Kanban there is a much larger product backlog, but in generally if your backlog is ever empty then the project is done and you can move on to something else.
+
+Move all of the items from 'Testing-doing' to 'Testing-done'. Move the top items from each portion of the board to the right up to the WIP limit. Time for the next lesson.
+
+page 7.
+
+We have finally completed the first tasks that we started at the beginning of this process. Not only that, but as you can see on the board we are an efficient working machine!
+
+Continue moving the top tasks to the WIP limit of the next portion of the board.
+
+page 8.
+
+Keep it flowing!
+
+page 9.
+
+You get the point by now. Move the items through the board until all of the tasks have made it through the testing to the final done column.
+
+You have now had the chance to experience Kanban with a Kanban board to match. Hopefully this gave you an idea of what the real process is like and helps you get started with your own project using Kanban.
